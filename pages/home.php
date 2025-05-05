@@ -16,6 +16,7 @@ $database = connectToDB();
 
 <?php require "parts/header.php"; ?>
     <div class="container mx-auto my-5" style="max-width: 500px;">
+    <?php if ( isset( $_SESSION["user"] ) ) : ?>
       <h1 class="h1 mb-4 text-center">My Blog</h1>
       <div class="card mb-2">
         <div class="card-body">
@@ -53,8 +54,6 @@ $database = connectToDB();
           </div>
         </div>
       </div>
-    
-      <?php if ( isset( $_SESSION["user"] ) ) : ?>
         <div class="mt-4 d-flex justify-content-center gap-3">
             <a href="/logout">Logout</a>
         </div>
