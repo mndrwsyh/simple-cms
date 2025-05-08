@@ -21,6 +21,8 @@
             </div>
           </div>
         </div>
+        <!--only show this to admin-->
+        <?php if (isEditor()) : ?>
         <div class="col">
           <div class="card mb-2">
             <div class="card-body">
@@ -37,6 +39,7 @@
               </div>
             </div>
           </div>
+          <?php endif; ?>
         </div>
       </div>
       <div class="mt-4 text-center">

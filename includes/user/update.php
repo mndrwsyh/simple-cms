@@ -12,7 +12,7 @@
     
     // 3. delete the user
 
-    if (empty($name) || empty($role) || empty($id)) {
+    if ( empty($name) || empty($role) || empty($id) ) {
         $_SESSION["error"] = "All fields are required";
         header("Location: /users-edit?id=" . $id);
         exit;

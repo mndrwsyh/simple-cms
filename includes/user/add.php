@@ -42,11 +42,11 @@
             $query->execute([ // add more
                 "email" => $email,
                 "name" => $name,
-                "password" => $password,
+                "password" => password_hash($password, PASSWORD_DEFAULT),
                 "role" => $role
             ]);
             //step 4 display success message aka garnish
-            $_SESSION["success"] = "User account successfully created!";
+            $_SESSION["success"] = "User password has been updated.";
         // TODO: 5. Redirect back to the /manage-users page
         
         header("Location: /users");

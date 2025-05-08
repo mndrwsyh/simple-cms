@@ -3,11 +3,13 @@
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h1 class="h1">Add New Post</h1>
       </div>
+      <?php require "parts/message-error.php"; ?>
       <div class="card mb-2 p-4">
-        <form>
+
+        <form method="POST" action="/post/add">
           <div class="mb-3">
             <label for="post-title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="post-title" />
+            <input type="text" class="form-control" id="post-title" name="post-title" />
           </div>
           <div class="mb-3">
             <label for="post-content" class="form-label">Content</label>
@@ -15,6 +17,7 @@
               class="form-control"
               id="post-content"
               rows="10"
+              name="post-content"
             ></textarea>
           </div>
           <div class="text-end">

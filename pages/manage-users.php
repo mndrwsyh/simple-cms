@@ -1,4 +1,11 @@
 <?php
+
+if ( !isEditor() ) {
+  header("Location: /dashboard"); 
+    exit;
+}
+
+
   // TODO: 1. connect to database
   $database = connectToDB();
   // TODO: 2. get all the users
@@ -21,7 +28,7 @@
           >
         </div>
         </div>
-          <!--success error-->
+          <!--success message-->
           <?php require "parts/message-success.php"; ?>
       <div class="card mb-2 p-4">
         <table class="table">
@@ -60,7 +67,7 @@
                     ><i class="bi bi-pencil"></i
                   ></a>
                   <a
-                    href="/users-changepwd"
+                    href="/users-changepwd?id=<?php echo $user["id"]; ?>"
                     class="btn btn-warning btn-sm me-2"
                     ><i class="bi bi-key"></i
                   ></a>

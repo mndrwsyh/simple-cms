@@ -1,4 +1,12 @@
 <?php
+
+
+if ( !isEditor() ) {
+  header("Location: /dashboard"); 
+    exit;
+}
+
+
   // TODO: 1. connect to database
   $database = connectToDB();
 //get id from url
