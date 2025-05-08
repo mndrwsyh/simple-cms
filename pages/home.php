@@ -54,8 +54,8 @@ $database = connectToDB();
         </div>
       </div>
       
-      <?php if ( isset( $_SESSION["user"] ) ) : ?>
-        <div class="mt-4 d-flex justify-content-center gap-3">
+      <?php if ( isUserLoggedIn()) : ?>
+        <div class="fs-6 mt-4 d-flex justify-content-center gap-3">
             <a href="/logout">Logout</a>
             <a href="/dashboard">Go to dashboard</a>
         </div>

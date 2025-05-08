@@ -13,25 +13,27 @@ if (
     empty($password) ||
     empty($confirm_password)
 ) {
-    echo "All the fields are required";
+    $_SESSION["error"] = "All the fields are required";
+        // redirect back to signup page
+        header("Location: /signup");
+        exit;
 } else if ( $password !== $confirm_password) {
-    echo "Your password is not matched" ;
+    $_SESSION["error"] = "Your password is not matched";
+        // redirect back to signup page
+        header("Location: /signup");
+        exit;
 } else {
-    //check and make sure email provided is not already exists in user table
-    //get user data by email
-    $sql = "SELECT * FROM users WHERE email = :email";
-    // 3.2 - prepare sql query (prepare your material)
-    $query = $database->prepare( $sql );
-    // 3.3 - execute sql query (cook it)
-    $query->execute([
-        "email" => $email
-    ]);
-    // 3.4 - fetch all the results from query (eat)
-    $user = $query->fetch();
+    //panggil function yg check if email dah ada lom
+    $user = getUserByEmail( $email ); 
 
     //5.1 SQL command
+    //kat sini baru dia signup kan user YES
+    //check is user exists or not
     if ( $user ) {
-        echo "The email provided already exists in our system";
+        $_SESSION["error"] = "The email provided already exists in our system";
+            // redirect back to signup page
+            header("Location: /signup");
+            exit;
     } else {
     $sql = "INSERT INTO users (`name`, `email`, `password`) VALUES (:name, :email, :password)";
     //5.2 prepare
@@ -43,6 +45,10 @@ if (
         "password" => password_hash( $password, PASSWORD_DEFAULT )
     ]);
     
+
+    // set success message
+    $_SESSION["success"] = "Account created succesfully! Please login with your email and password";
+
     //6. redirect to login.php
     header("Location: /login");
     exit;

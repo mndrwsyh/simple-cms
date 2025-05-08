@@ -11,19 +11,12 @@ if (
     empty($email) ||
     empty($password) 
 ) {
-    echo "All the fields are required";
+    $_SESSION["error"] = "All fields are required";
+    // redirect back to login page
+    header("Location: /login");
+    exit;
 } else {
-    //5. get the user data by email
-    //5.1 SQL
-    $sql = "SELECT * FROM users WHERE email = :email";
-    //5.2 prepare
-    $query = $database->prepare( $sql );
-    //5.3 execute
-    $query->execute ([
-        "email" => $email
-    ]);
-    //5.4 fetch
-    $user = $query->fetch(); //fetch return the first row of list (one item only), fetchall return everything that is matched
+    $user = getUserByEmail( $email ); 
 
     //check if the user exist or not
     if ( $user ){
@@ -32,13 +25,25 @@ if (
             //7. store the user data in the session storage to login the user
             $_SESSION["user"] = $user;
 
-            //8. redirect user back to index php
+            //8. set success message
+            $_SESSION["success"] = "Welcome back, ". $user["name"] . "!";
+
+            //9. redirect user back to index php
             header("Location:/dashboard");
             exit;
         } else {
-            echo "The password provided is incorrect";
+            $_SESSION["error"] = "The password provided is incorrect";
+        
+            // redirect back to login page
+            header("Location: /login");
+            exit;
         }
     } else {
-        echo "The email provided does not exist";
+        $_SESSION["error"] = "The email provided does not exist";
+
+        // redirect back to login page
+        header("Location: /login");
+        exit;
     }
+
 }

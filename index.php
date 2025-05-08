@@ -3,26 +3,11 @@
 session_start();
 
 require "includes/functions.php";
-
-/* 
-decide what page to load depending on the url the user visit
-localhost:9000/ -> home.php
-localhost:9000/login -> login.php
-localhost:9000/signup -> signup.php
-localhost:9000/logout -> logout.php
-
-action routes :
-localhost:900/auth/login -> includes/auth/do_login.php
-localhost:900/auth/signup -> includes/auth/signup.php
-localhost:900/task/add -> includes/task/add.php
-localhost:900/task/complete -> includes/task/compelted.php
-localhost:900/task/delete -> includes/task/del.php
-
-*/
-
 //global variable = $_
 //figure out what path the user is visiting
 $path = $_SERVER["REQUEST_URI"];
+//remove all query string from url
+$path = parse_url( $path, PHP_URL_PATH);
 
 //once u figure out the path, then need to load the relevant content based on the path
 
@@ -74,7 +59,19 @@ switch ($path) {
   case '/auth/signup':
     require "includes/auth/do_signup.php";
     break;
-  
+    //setup action route for add user
+    // TODO: setup the action route for add user
+    case '/user/add':
+      require "includes/user/add.php";
+      break;
+    //setup action route for delete user
+    case '/user/delete':
+      require "includes/user/delete.php";
+      break;
+      case '/user/update':
+        require "includes/user/update.php";
+        break;
+
   default:
   require "pages/home.php";
     break;
