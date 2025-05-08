@@ -2,7 +2,7 @@
 
 
 if ( !isEditor() ) {
-  header("Location: /dashboard"); 
+  header("Location: /home"); 
     exit;
 }
 
